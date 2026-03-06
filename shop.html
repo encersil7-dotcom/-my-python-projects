@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zayar's Shop</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; }
+
+        /* Header */
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 { font-size: 2em; }
+        header p { color: #aaa; }
+
+        /* Products */
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px;
+            justify-content: center;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            width: 200px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .card img { font-size: 3em; }
+        .card h3 { margin: 10px 0 5px; }
+        .card p { color: #e74c3c; font-weight: bold; font-size: 1.2em; }
+        .card button {
+            margin-top: 10px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card button:hover { background: #e74c3c; }
+
+        /* Cart */
+        .cart {
+            background: white;
+            margin: 0 30px 30px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .cart h2 { margin-bottom: 10px; }
+        #cart-items { color: #555; }
+        #total { font-weight: bold; color: #e74c3c; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🛒 Zayar's Shop</h1>
+    <p>Best products for you!</p>
+</header>
+
+<div class="products">
+    <div class="card">
+        <div style="font-size:3em">👟</div>
+        <h3>Sneakers</h3>
+        <p>$25</p>
+        <button onclick="addToCart('Sneakers', 25)">Add to Cart</button>
+    </div>
+    <div class="card">
+        <div style="font-size:3em">👕</div>
+        <h3>T-Shirt</h3>
+        <p>$15</p>
+        <button onclick="addToCart('T-Shirt', 15)">Add to Cart</button>
+    </div>
+    <div class="card">
+        <div style="font-size:3em">🎒</div>
+        <h3>Backpack</h3>
+        <p>$40</p>
+        <button onclick="addToCart('Backpack', 40)">Add to Cart</button>
+    </div>
+    <div class="card">
+        <div style="font-size:3em">⌚</div>
+        <h3>Watch</h3>
+        <p>$60</p>
+        <button onclick="addToCart('Watch', 60)">Add to Cart</button>
+    </div>
+</div>
+
+<div class="cart">
+    <h2>🧺 My Cart</h2>
+    <div id="cart-items">Cart is empty</div>
+    <div id="total"></div>
+</div>
+
+<script>
+    let cart = [];
+
+    function addToCart(name, price) {
+        cart.push({ name, price });
+        updateCart();
+    }
+
+    function updateCart() {
+        const items = document.getElementById('cart-items');
+        const total = document.getElementById('total');
+        if (cart.length === 0) {
+            items.innerHTML = 'Cart is empty';
+            total.innerHTML = '';
+        } else {
+            items.innerHTML = cart.map(i => `✅ ${i.name} — $${i.price}`).join('<br>');
+            const sum = cart.reduce((a, b) => a + b.price, 0);
+            total.innerHTML = `Total: $${sum}`;
+        }
+    }
+</script>
+
+</body>
+</html>
